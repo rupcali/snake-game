@@ -16,7 +16,12 @@ class Food(Turtle):
         self.new_loc()
         
     def new_loc(self):
+        self.showturtle()
         random_x = random.randint(-260, 260)
         random_y = random.randint(-260, 260)
         self.goto(x=random_x, y=random_y)
+        
+    def hide_food(self):
+        self.hideturtle()
+        self.goto(1000, 1000)
         

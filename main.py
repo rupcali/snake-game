@@ -26,6 +26,7 @@ screen.onkey(snake.left, "Left")
 
 food_counter = 1
 food.create_food()
+super_food.hide_super_food()
 
 while not game_over:
     screen.update()
@@ -38,29 +39,42 @@ while not game_over:
         snake.extend()
         food_counter += 1
         scoreboard.increase_score()
-    elif snake.head.distance(food) < 15 and food_counter % 5 == 0:
-        super_food.showturtle()
+    elif snake.head.distance(food) < 15 and food_counter % 5 == 0 and scoreboard.score != 0:
+        scoreboard.increase_score()
         super_food.create_superfood()
-        food.hideturtle()
-    if snake.head.distance(super_food) < 20 and food_counter % 5 == 0:
+        super_food.showturtle()
+        food_counter += 1
+        food.hide_food()
+    elif snake.head.distance(food) < 15 and food_counter % 5 == 0 and scoreboard.score == 0:
+        food.new_loc()
+        snake.extend()
+        food_counter += 1
+        scoreboard.increase_score()
+    if snake.head.distance(super_food) < 20:
         snake.extend()
         snake.extend()
         snake.extend()
         food_counter += 1
         scoreboard.increase_score()
-        super_food.hideturtle()
-        food.showturtle()
+        super_food.hide_super_food()
+        food.new_loc()
 
     # detect collision with wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_over = True
-        scoreboard.write_game_over()
+        scoreboard.reset_scoreboard()
+        snake.reset_snake()
+        food_counter = 1
+        food.new_loc()
+        super_food.hide_super_food()
         
     # detect collision with tail
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_over = True
-            scoreboard.write_game_over()
+            scoreboard.reset_scoreboard()
+            snake.reset_snake()
+            food_counter = 1
+            food.new_loc()
+            super_food.hide_super_food()
     
 
 screen.exitonclick()
