@@ -48,7 +48,7 @@ Before running the Snake game, make sure you have Python 3.x installed on your s
 ## Dependencies
 - This project uses the Turtle graphics library, which is typically included with Python and does not require additional installations.
 ## Screenshots
-![Screenshot 1](screenshots/snake_1)
-![Screenshot 2](screenshots/snake_2)
+![Screenshot 1](screenshots/snake_1.png)
+![Screenshot 2](screenshots/snake_2.png)
 
 Enjoy playing the Snake game!
